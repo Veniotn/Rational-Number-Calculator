@@ -3,4 +3,4 @@ project(2___Rationals)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(2___Rationals main.cpp RationalNumber.cpp RationalNumber.h)
+add_executable(2___Rationals main.cpp RationalNumber.cpp RationalNumber.h util.cpp util.h)

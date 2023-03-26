@@ -1,19 +1,55 @@
-#include <iostream>
+
 #include "RationalNumber.h"
+#include "util.h"
 using namespace std;
-int main() {
-    RationalNumber test = RationalNumber(7,13);
+int main()
+{
 
-    RationalNumber test2 = RationalNumber(8,13);
+    //prompt for input and validate it
+    string inputOne = Util::getInput();
+    string inputTwo = Util::getInput();
 
-    RationalNumber test3 = RationalNumber(4,-8);
+    //create two rational number objects based off of the inputs and declare another for testing.
+    RationalNumber rationalNumber1 = RationalNumber(inputOne);
+    RationalNumber rationalNumber2 = RationalNumber(inputTwo);
+    RationalNumber rationalTester;
 
-//    RationalNumber test4 =  test2  test;
+    //Operator tests
+    //Addition test
+    rationalTester =  rationalNumber1 + rationalNumber2;
+    cout << rationalTester << endl;
+    //Subtraction test
+    rationalTester = rationalNumber1 - rationalNumber2;
+    cout << rationalTester << endl;
+    //multiplication test
+    rationalTester =  rationalNumber1 * rationalNumber2;
+    cout << rationalTester << endl;
+    //Division test
+    rationalTester =  rationalNumber1 / rationalNumber2;
+    cout << rationalTester << endl;
 
-bool testbool = test < test2;
+    //bool tests
+    //> test
+    cout << (rationalNumber1 > rationalNumber2) << endl;
+    //< test
+    cout << (rationalNumber1 < rationalNumber2) << endl;
+    //== test
+    cout << (rationalNumber1 == rationalNumber2) << endl;
 
 
-    cout << testbool;
+    //other constructor tests.
+    RationalNumber defaultConstructor     = RationalNumber();
+    cout << "default constructor:" << endl;
+    cout << defaultConstructor.getNumerator() << "/" << defaultConstructor.getDenominator() << endl;
+
+    RationalNumber twoParamConstructor    = RationalNumber(7,13);
+    cout << "two param constructor:" << endl;
+    cout << twoParamConstructor.getNumerator() << "/" << twoParamConstructor.getDenominator() << endl;
+
+    RationalNumber wholeNumberConstructor = RationalNumber(8);
+    cout << "whole number one param constructor:" << endl;
+    cout << wholeNumberConstructor.getNumerator() << "/" << wholeNumberConstructor.getDenominator() << endl;
+
 
     return 0;
 }

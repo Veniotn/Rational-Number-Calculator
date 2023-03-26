@@ -5,10 +5,8 @@
 
 #ifndef INC_2___RATIONALS_RATIONALNUMBER_H
 #define INC_2___RATIONALS_RATIONALNUMBER_H
-#include <string>
-#include <iostream>
+#include "util.h"
 
-using namespace std;
 class RationalNumber {
 
 private:
@@ -17,14 +15,9 @@ private:
 public:
 
     //constructors
-    //default
     RationalNumber():numerator(0), denominator(1){}
-    //Two args
     RationalNumber(int numerator, int denominator): numerator(numerator), denominator(denominator){}
-
-
     RationalNumber(int wholeNumber);
-
     RationalNumber(string stringInput);
 
 
@@ -39,13 +32,13 @@ public:
     bool operator <  (RationalNumber& rightNumber);
     bool operator == (RationalNumber& rightNumber);
 
-
     //overloaded print operator
     friend ostream& operator << (ostream & output, RationalNumber& rationalNumber);
 
 
     //methods
     void simplifyFraction();
+
 
     //getters and setters
     int getNumerator()
@@ -65,7 +58,6 @@ public:
     void setDenominator(int denominator) {
         RationalNumber::denominator = denominator;
     }
-
 
 };
 

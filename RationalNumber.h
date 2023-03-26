@@ -14,8 +14,6 @@ class RationalNumber {
 private:
     int numerator, denominator;
 
-
-
 public:
 
     //constructors
@@ -30,19 +28,28 @@ public:
     RationalNumber(string stringInput);
 
 
-    //overloaded operators
-    RationalNumber operator + (const RationalNumber& rightNumber) const;
-    RationalNumber operator - (const RationalNumber& rightNumber) const;
-    RationalNumber operator * (const RationalNumber& rightNumber) const;
-    RationalNumber operator / (const RationalNumber& rightNumber) const;
+    //overloaded basic math operators
+    RationalNumber  operator + (RationalNumber& rightNumber);
+    RationalNumber  operator - (RationalNumber& rightNumber);
+    RationalNumber  operator * (RationalNumber& rightNumber);
+    RationalNumber  operator / (RationalNumber& rightNumber);
+
+    //overloaded boolean operators
+    bool operator >  (RationalNumber& rightNumber);
+    bool operator <  (RationalNumber& rightNumber);
+    bool operator == (RationalNumber& rightNumber);
 
 
-    int lowestCommonDenominator(int denominatorOne, int denominatorTwo) const;
+    //overloaded print operator
+    friend ostream& operator << (ostream & output, RationalNumber& rationalNumber);
 
 
+    //methods
+    void simplifyFraction();
 
     //getters and setters
-    int getNumerator() const {
+    int getNumerator()
+    {
         return numerator;
     }
 
@@ -50,7 +57,8 @@ public:
         RationalNumber::numerator = numerator;
     }
 
-    int getDenominator() const {
+    int getDenominator()
+    {
         return denominator;
     }
 

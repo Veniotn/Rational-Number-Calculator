@@ -1,7 +1,7 @@
 //
 // Created by nick on 3/24/2023.
 //
-
+#include <numeric>
 #include "RationalNumber.h"
 
 RationalNumber::RationalNumber(string stringInput)
@@ -15,53 +15,48 @@ RationalNumber::RationalNumber(int wholeNumber)
 
 }
 
-int RationalNumber::lowestCommonDenominator(int denominatorOne, int denominatorTwo) const {
-    const int ZERO = 0;
-    //get the larger of the two denominators
-    int currentDenominator = (denominatorOne > denominatorTwo) ? denominatorOne : denominatorTwo;
+void RationalNumber::simplifyFraction()
+{
+    //get the greatest common denominator, then divide both the numerator and operator by the gcd.
+    int greatestDenominator = gcd(this->numerator, this->denominator);
 
-    while (true)
+    numerator   = numerator   / greatestDenominator;
+    denominator = denominator / greatestDenominator;
+
+    //if either numerator or denominator are negative, negate them and add the negative property to the object
+    if (numerator < 0 || denominator < 0)
     {
-        //check if the current denominator evenly divides into both denominators
-        if ((currentDenominator % denominatorOne) == ZERO && (currentDenominator % denominatorTwo) == ZERO)
-        {
-            //If the both divide evenly, we have found the lowest common denominator and we can return it.
-            return currentDenominator;
-        }
-        //else add one to the current denominator and check again.
-        currentDenominator++;
+        numerator   = numerator   < 0 ? (numerator   * -1) : numerator;
+        denominator = denominator < 0 ? (denominator * -1) : denominator;
     }
 
 }
 
 
 
-
-RationalNumber RationalNumber::operator+(const RationalNumber &rightNumber) const
+//Math operators
+RationalNumber RationalNumber::operator+(RationalNumber &rightNumber)
 {
     int  numerator, denominator;
+    cout << "+ operator firing." << endl;
+
+    //Uses the object that called the methods properties and the other RA.
+    numerator = (this->numerator * rightNumber.denominator) + (rightNumber.numerator * this->denominator);
+    denominator = this->denominator * rightNumber.denominator;
 
 
-    cout << " + Operator method fired." << endl;
-    //Steps to add rational numbers:
-    //1. find common denominator.
-    denominator  = RationalNumber::lowestCommonDenominator(this->denominator, rightNumber.denominator);
-    //2. Add the two top numbers together
-    numerator = this->numerator + rightNumber.numerator;
 
-
-    //return the new rational number
-    return RationalNumber(numerator, denominator);
+    return RationalNumber(numerator,denominator);
 }
 
-RationalNumber RationalNumber::operator-(const RationalNumber &rightNumber)const
+RationalNumber RationalNumber::operator-(RationalNumber &rightNumber)
 {
     int numerator, denominator;
-    cout << " - Operator fired." << endl;
+    cout << "- operator firing." << endl;
 
-    //same steps as + operator, just subtracting the numerators at the end.
-    denominator = RationalNumber::lowestCommonDenominator(this->denominator, rightNumber.denominator);
-    numerator = this->numerator - rightNumber.numerator;
+    //same steps as + operator, just subtraction
+    numerator = (this->numerator * rightNumber.denominator) - (rightNumber.numerator * this->denominator);
+    denominator = this->denominator * rightNumber.denominator;
 
 
     //Return new Rational number
@@ -69,13 +64,69 @@ RationalNumber RationalNumber::operator-(const RationalNumber &rightNumber)const
 }
 
 
-//RationalNumber operator * (const RationalNumber& rightNumber)
-//{
-//
-//}
+RationalNumber RationalNumber::operator*(RationalNumber& rightNumber)
+{
+    int numerator, denominator;
+
+    cout << "* operator firing" << endl;
+
+    //multiply the numerator of this fraction with the numerator of the right fraction,
+    numerator   = (this->numerator * rightNumber.numerator);
+
+    //multiply the denominator of this fraction with the denominator of the right fraction.
+    denominator = (this->denominator * rightNumber.denominator);
 
 
-//RationalNumber operator / (const RationalNumber& rightNumber)
-//{
-//
-//}
+    //return the new rational number
+    return {numerator,denominator};
+}
+
+
+RationalNumber RationalNumber::operator/(RationalNumber &rightNumber)
+{
+    int numerator, denominator;
+    cout << "/ operator method firing." << endl;
+
+    numerator = this->numerator * rightNumber.denominator;
+    denominator = this->denominator * rightNumber.numerator;
+
+    return {numerator,denominator};
+}
+//end math operators.
+
+//boolean operators
+bool RationalNumber::operator<(RationalNumber &rightNumber)
+{
+    cout << "< operator firing" << endl;
+    return (this->numerator * rightNumber.denominator) < (rightNumber.numerator * this->denominator);
+}
+
+bool RationalNumber::operator>(RationalNumber &rightNumber)
+{
+    cout << "> operator firing" << endl;
+    return (this->numerator * rightNumber.denominator) > (rightNumber.numerator * this->denominator);
+}
+
+bool RationalNumber::operator==(RationalNumber &rightNumber)
+{
+    cout << "== operator firing" << endl;
+    return (this->numerator * rightNumber.denominator) == (rightNumber.numerator * this->denominator);
+}
+//end boolean operators.
+
+//output overload.
+ostream& operator<<(std::ostream & output, RationalNumber& rationalNumber)
+{
+    output << "<< overload firing " << endl;
+
+    if (rationalNumber.numerator < 0 || rationalNumber.denominator < 0 )
+    {
+        output << "-";
+    }
+
+    rationalNumber.simplifyFraction();
+    output << rationalNumber.numerator << "/" << rationalNumber.denominator;
+
+
+    return output;
+}

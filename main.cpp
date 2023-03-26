@@ -2,13 +2,18 @@
 #include "RationalNumber.h"
 using namespace std;
 int main() {
-    RationalNumber test = RationalNumber(1,5);
+    RationalNumber test = RationalNumber(7,13);
 
-    RationalNumber test2 = RationalNumber(2,3);
+    RationalNumber test2 = RationalNumber(8,13);
 
-    RationalNumber test3 = test2 - test;
+    RationalNumber test3 = RationalNumber(4,-8);
 
-    cout << test3.getNumerator() << " " << test3.getDenominator() << endl;
+//    RationalNumber test4 =  test2  test;
+
+bool testbool = test < test2;
+
+
+    cout << testbool;
 
     return 0;
 }

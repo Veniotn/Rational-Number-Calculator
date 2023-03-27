@@ -22,15 +22,17 @@ public:
 
 
     //overloaded basic math operators
-    RationalNumber  operator + (RationalNumber& rightNumber);
-    RationalNumber  operator - (RationalNumber& rightNumber);
-    RationalNumber  operator * (RationalNumber& rightNumber);
-    RationalNumber  operator / (RationalNumber& rightNumber);
+    RationalNumber  operator + (const RationalNumber& rightNumber);
+    RationalNumber  operator - (const RationalNumber& rightNumber);
+    RationalNumber  operator * (const RationalNumber& rightNumber);
+    RationalNumber  operator / (const RationalNumber& rightNumber);
+    RationalNumber  operator += (const RationalNumber& rightNumber);
+    RationalNumber  operator =  (const RationalNumber& rightNumber);
 
     //overloaded boolean operators
-    bool operator >  (RationalNumber& rightNumber);
-    bool operator <  (RationalNumber& rightNumber);
-    bool operator == (RationalNumber& rightNumber);
+    bool operator >  (const RationalNumber& rightNumber);
+    bool operator <  (const RationalNumber& rightNumber);
+    bool operator == (const RationalNumber& rightNumber);
 
     //overloaded print operator
     friend ostream& operator << (ostream & output, RationalNumber& rationalNumber);

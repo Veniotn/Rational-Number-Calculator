@@ -2,7 +2,7 @@
 // Created by nick on 3/26/2023.
 //
 
-#include "util.h"
+#include "../inc/util.h"
 regex wholeNumberRegex("^-?[1-9]\\d*$"), fractionRegex("((-?\\d+)/(-?\\d+))");
 const int ZERO  = 0;
 
